@@ -1,9 +1,12 @@
 package com.example.hellospring
 
+import org.codehaus.groovy.transform.tailrec.GotoRecurHereException
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
 @SpringBootApplication
@@ -22,5 +25,13 @@ class HelloSpringApplication {
     @GetMapping("/hello")
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
         return String.format("Hello %s!", name);
+    }
+    @RequestMapping( "/add")
+    public @ResponseBody Float add(
+        @RequestParam(name ="a") Float a,
+        @RequestParam(name ="b") Float b
+    )
+    {
+        return a + b;
     }
 }
