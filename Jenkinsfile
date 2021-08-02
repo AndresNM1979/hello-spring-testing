@@ -23,7 +23,7 @@ pipeline {
        stage('Deploying'){
             steps{
                 echo 'Se ha archivado el artefacto, desplegando ..'
-                sh 'docker-compose up -d'
+            //    sh 'docker-compose up -d'
             }
        }
 
