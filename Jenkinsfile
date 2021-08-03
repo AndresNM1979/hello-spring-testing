@@ -38,7 +38,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh './gradlew assemble'
+                //sh './gradlew assemble'
                //****SE PODRIA GENERAR UN CONTENEDOR****
                 sh 'docker-compose build'
             }
