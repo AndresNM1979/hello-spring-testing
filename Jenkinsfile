@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 pipeline {
    agent any
     stages {
@@ -6,8 +7,8 @@ pipeline {
                 echo 'Testing..'
                 withGradle {
                     sh './gradlew clean test'
+                        }
                 }
-           }
            post {
                 always {
                     junit 'build/test-results/test/TEST-*.xml'
