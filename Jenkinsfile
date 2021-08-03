@@ -28,10 +28,9 @@ pipeline {
                             tools: [
                                 pmdParser(pattern: 'build/reports/pmd/+.xml')
                             ]
-                        }
+                        )
                    }
-              )
-            }
+              }
         }
         stage('Build') {
             steps {
