@@ -43,10 +43,10 @@ pipeline {
                 sh 'docker-compose build'
             }
         }
-        stage('Security'){
-            steps{
+        stage('Security') {
+            steps {
                 echo 'Se realiza el analisis de seguridad en contenedor ..'
-                sh 'trivy image --format=json --output=trivy-image.json hello-spring-test:latest'
+                sh 'trivy image --format=json --output=trivy-image.json debian:latest'
             }
             post{
                 always{
@@ -64,8 +64,8 @@ pipeline {
         //        archiveArtifacts artifacts: 'build/libs/*.jar'
         //    }
         //}
-       stage('Deploying'){
-            steps{
+       stage('Deploying') {
+            steps {
                 echo 'Se ha archivado el artefacto, desplegando ..'
         //        sh 'docker-compose up -d'
             }
