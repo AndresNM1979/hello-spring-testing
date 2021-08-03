@@ -12,6 +12,7 @@ pipeline {
                 always {
                     junit 'build/test-results/test/TEST-*.xml'
                     jacoco execPattern:'build/jacoco/*.exec'
+
                 }
            }
         }
@@ -21,6 +22,15 @@ pipeline {
               withGradle {
                   sh './gradlew check'
               }
+              post {
+                   always {
+                        recordIssues(
+                            tools: [
+                                pmdParser(pattern: 'build/reports/pmd/+.xml')
+                            ]
+                        }
+                   }
+              )
             }
         }
         stage('Build') {
