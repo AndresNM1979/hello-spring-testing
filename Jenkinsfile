@@ -29,7 +29,7 @@ pipeline {
                       recordIssues(
                           tools: [
                               pmdParser(pattern: 'build/reports/pmd/+.xml'),
-                              spotBugs(pattern: 'build/reports/spotbugs/+.xml')
+                              spotBugs(pattern: 'build/reports/spotbugs/+.xml', useRankAsPriority: true)
                           ]
                       )
                  }
