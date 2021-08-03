@@ -15,6 +15,14 @@ pipeline {
                 }
            }
         }
+        //stage de calidad de servicio
+        stage('QA') {
+            steps {
+              withGradle {
+                  sh './gradlew check'
+              }
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
