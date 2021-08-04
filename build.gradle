@@ -19,6 +19,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.codehaus.groovy:groovy'
+    testImplementation 'org.assertj:assertj-core:3.20.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -43,4 +44,8 @@ jacocoTestReport {
 spotbugs {
     ignoreFailures = true
 }
-
+sonarqube {
+    properties {
+        property "sonar.projectKey", "andres_hello-spring-test_AXsQCdZADVOvu2A-cZNL"
+    }
+}
