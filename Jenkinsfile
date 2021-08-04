@@ -13,18 +13,20 @@ pipeline {
                 always {
                     junit 'build/test-results/test/TEST-*.xml'
                     jacoco execPattern:'build/jacoco/*.exec'
+                    recordIssues(enabledForFailure: true, tool: pit(pattern: "build/reports/pitest/**/*.xml"))
 
                 }
            }
         }
 
-	stage('SonarQube Analysis') {
-	    steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube"
-                }
-	    }	
-        }
+	    stage('SonarQube Analysis') {
+            when { expression {false}}
+	        steps {
+                  withSonarQubeEnv('SonarQube') {
+                        sh "./gradlew sonarqube"
+                  }
+            }
+         }
         //stage de calidad de servicio
         stage('QA') {
             steps {
