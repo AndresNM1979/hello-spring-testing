@@ -17,6 +17,12 @@ pipeline {
                 }
            }
         }
+
+	stage('SonarQube Analysis') {
+            withSonarQubeEnv() {
+                sh "./gradlew sonarqube"
+            }
+        }
         //stage de calidad de servicio
         stage('QA') {
             steps {
