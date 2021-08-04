@@ -33,18 +33,14 @@ jacocoTestReport {
         csv.required = true
         html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
     }
-    //pmd {
-    //    consoleOutput = true
-    //    toolVersion = "6.21.0"
-    //    rulesMinimumPriority = 5
-    //    ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
-    //}
-    spotbugs {
-        ignoreFailures = true
-    }
-   stage('SonarQube Analysis') {
-      withSonarQubeEnv() {
-        sh "./gradlew sonarqube"
-      }
-    }
 }
+//pmd {
+//    consoleOutput = true
+//    toolVersion = "6.21.0"
+//    rulesMinimumPriority = 5
+//    ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+//}
+spotbugs {
+    ignoreFailures = true
+}
+
