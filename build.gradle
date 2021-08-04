@@ -53,3 +53,7 @@ sonarqube {
         property "sonar.projectKey", "andres_hello-spring-test_AXsQCdZADVOvu2A-cZNL"
     }
 }
+pitest {
+    junit5PluginVersion = '0.12'
+    outputFormats = ['XML', 'HTML']
+}
