@@ -50,40 +50,40 @@ pipeline {
                     }
                 }
             }
-            stage('Build') {
-                steps {
-                    echo 'Building..'
-                    //sh './gradlew assemble'
-                    //****SE PODRIA GENERAR UN CONTENEDOR****
-                    sh 'docker-compose build'
+        }
+        stage('Build') {
+            steps {
+                echo 'Building..'
+                //sh './gradlew assemble'
+                //****SE PODRIA GENERAR UN CONTENEDOR****
+                sh 'docker-compose build'
+            }
+        }
+        stage('Security') {
+            steps {
+                echo 'Se realiza el analisis de seguridad en contenedor ..'
+                sh 'trivy image --format=json --output=trivy-image.json debian:latest'
+            }
+            post {
+                always {
+                    recordIssues(
+                            enabledForFailure: true,
+                            aggregatingResults: true,
+                            tool: trivy(pattern: 'trivy-*.json')
+                    )
                 }
             }
-            stage('Security') {
-                steps {
-                    echo 'Se realiza el analisis de seguridad en contenedor ..'
-                    sh 'trivy image --format=json --output=trivy-image.json debian:latest'
-                }
-                post {
-                    always {
-                        recordIssues(
-                                enabledForFailure: true,
-                                aggregatingResults: true,
-                                tool: trivy(pattern: 'trivy-*.json')
-                        )
-                    }
-                }
-            }
-            //stage('Archive'){
-            //    steps{
-            //        echo 'Archivando..'
-            //        archiveArtifacts artifacts: 'build/libs/*.jar'
-            //    }
-            //}
-            stage('Deploying') {
-                steps {
-                    echo 'Se ha archivado el artefacto, desplegando ..'
-                    //        sh 'docker-compose up -d'
-                }
+        }
+        //stage('Archive'){
+        //    steps{
+        //        echo 'Archivando..'
+        //        archiveArtifacts artifacts: 'build/libs/*.jar'
+        //    }
+        //}
+        stage('Deploying') {
+            steps {
+                echo 'Se ha archivado el artefacto, desplegando ..'
+                //        sh 'docker-compose up -d'
             }
         }
     }
