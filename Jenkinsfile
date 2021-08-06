@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 withGradle {
-                    sh './gradlew clean test'
+                    sh './gradlew clean test pitest'
                 }
             }
             post {
@@ -62,7 +62,7 @@ pipeline {
         stage('Security') {
             steps {
                 echo 'Se realiza el analisis de seguridad en contenedor ..'
-                sh 'trivy image --format=json --output=trivy-image.json debian:latest'
+                sh 'trivy image --format=json --output=trivy-image.json hello-gradle-test:latest'
             }
             post {
                 always {
