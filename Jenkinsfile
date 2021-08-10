@@ -23,7 +23,7 @@ pipeline {
         stage('Analysis') {
             parallel {
                 stage('SonarQube Analysis') {
-                    when { expression { true } }
+                    when { expression { false } }
                     steps {
                         withSonarQubeEnv('SonarQube') {
                             sh "./gradlew sonarqube"
@@ -33,6 +33,7 @@ pipeline {
 
                 //stage de calidad de servicio
                 stage('QA') {
+                    when { expression { false } }
                     steps {
                         withGradle {
                             sh './gradlew check'
