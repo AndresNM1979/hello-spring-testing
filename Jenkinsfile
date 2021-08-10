@@ -84,6 +84,9 @@ pipeline {
             steps {
                 echo 'Se ha archivado el artefacto, desplegando ..'
                 //        sh 'docker-compose up -d'
+                sshagent(['appKey']) {
+                   sh "ssh -o StrictHostKeyChecking=no app@10.250.2.3 'cd hello-spring && docker-compose pull && docker-compose up$
+                }
             }
         }
     }

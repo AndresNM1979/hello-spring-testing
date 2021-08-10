@@ -1,7 +1,7 @@
 version: "3.0"
 services:
   hellogradle:
-    image: hello-spring-test:latest
+    image: 10.250.2.3:5050/andres/hello-gradle:latest
     build: .
     ports:
       - "80:8080"
